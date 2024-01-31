@@ -3,68 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Submit Memory</title>
+    <!-- Vos liens CSS et autres scripts restent inchangés -->
     <link rel="stylesheet" href="form_styles.css">
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            background-color: #000; /* Couleur de fond noire */
-        }
-
-        #background {
-            position: fixed;
-            width: 150%;
-            height: 150%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        #background iframe {
-            width: 100vw;
-            height: 100vh;
-            object-fit: fill; /* Ajustez cette propriété pour rognage/zoom */
-        }
-
-        #form-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #000; /* Couleur de fond noire */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            color: #fff; /* Couleur du texte blanc */
-        }
-
-        h1, label, textarea, p, button {
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        textarea {
-            width: 100%;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Inclusion de la bibliothèque EmailJS -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="email.js"></script>
     <script src="form_script.js"></script>
 </head>
@@ -93,21 +35,48 @@
 
     <script>
         $(document).ready(function() {
-            // Récupérer les paramètres d'URL (lat et lng)
             var urlParams = new URLSearchParams(window.location.search);
             var lat = urlParams.get('lat');
             var lng = urlParams.get('lng');
 
-            // Afficher les coordonnées dans le champ texte (peut être masqué si nécessaire)
             if (lat !== null && lng !== null) {
-                $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
+                // Utilisez '#memoryText' au lieu de '#coordinates' pour remplir le champ texte
+                $('#memoryText').val('Lat: ' + lat + ', Lng: ' + lng);
             }
 
             $('#sendMemoryButton').on('click', function() {
-                // Appeler la fonction pour envoyer la mémoire
                 sendMemory();
             });
         });
+
+        function fillFormWithCoordinates(lat, lng) {
+            // Utilisez '#memoryText' au lieu de '#coordinates' pour remplir le champ texte
+            var memoryText = 'Coordinates: Lat=' + lat + ', Lng=' + lng + ' (' + lat + ', ' + lng + ')';
+            // Vous pouvez ajouter d'autres informations ou instructions ici si nécessaire
+            $('#memoryText').val(memoryText);
+        }
+
+        function sendMemory() {
+            var coordinates = $('#memoryText').val();  // Utilisez '#memoryText' pour obtenir les coordonnées
+            var memoryText = $('#memoryText').val();
+
+            emailjs.send("service_f48v2un", "template_vxz0hml", {
+                coordinates: coordinates,
+                memoryText: memoryText
+            }).then(
+                function(response) {
+                    console.log('E-mail sent successfully:', response);
+                    // Ajoutez ici toute logique supplémentaire après l'envoi réussi
+                },
+                function(error) {
+                    console.log('Error sending e-mail:', error);
+                    // Ajoutez ici toute logique supplémentaire en cas d'erreur
+
+                    // Affichez les détails de l'erreur dans une alerte pour un débogage rapide
+                    alert('Error sending e-mail: ' + JSON.stringify(error));
+                }
+            );
+        }
     </script>
 </body>
 </html>
