@@ -6,13 +6,14 @@ const addMemoriesLinkLarge = '<p id="addMemoriesLink" style="font-size: 18px; te
 var souvenirs = [
     { lat: 40.7128, lng: -74.0060, message: "Statue de la Liberté" },
     { lat: 34.0522, lng: -118.2437, message: "Hollywood Sign" }
-    { lat: 40.350606065486744, lng: -77.5634238370936, message: "test" }
+    
     // Ajoutez d'autres souvenirs fictifs au besoin
 ];
 
 var manualMemories = [
     { lat: 38.907, lng: -77.037, message: "Alpha test" },
     { lat: 34.0522, lng: -118.2437, message: "Beta test" }
+    { lat: 40.350606065486744, lng: -77.5634238370936, message: "test" }
     // Ajoutez d'autres souvenirs manuels au besoin
 ];
 
