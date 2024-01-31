@@ -1,7 +1,7 @@
 // script.js
 
-const addMemoriesLink = '<p id="addMemoriesLink" style="text-decoration: underline; color: blue; cursor: pointer;">Add your memories here</p>';
-const addMemoriesLinkLarge = '<p id="addMemoriesLink" style="font-size: 18px; text-decoration: underline; color: blue; cursor: pointer;">Add your memories here</p>';
+const addMemoriesLink = '<p id="addMemoriesLink" class="popup-link">Add your memories here</p>';
+const addMemoriesLinkLarge = '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>';
 
 var souvenirs = [
     { lat: 40.7128, lng: -74.0060, message: "Statue de la Liberté" },
