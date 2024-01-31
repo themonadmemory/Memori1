@@ -33,9 +33,11 @@ manualMemories.forEach(function (memory) {
 map.on('contextmenu', function (event) {
     lastClickedCoords = event.latlng;
 
+    var popupContent = L.Browser.mobile ? addMemoriesLinkLarge : addMemoriesLink;
+
     var popup = L.popup()
         .setLatLng(event.latlng)
-        .setContent(addMemoriesLink)
+        .setContent(popupContent)
         .openOn(map);
 
     $('#addMemoriesLink').on('click', function () {
@@ -53,9 +55,11 @@ map.on('contextmenu', function (event) {
 map.on('taphold', function (event) {
     lastClickedCoords = event.latlng;
 
+    var popupContent = L.Browser.mobile ? addMemoriesLinkLarge : addMemoriesLink;
+
     var popup = L.popup()
         .setLatLng(event.latlng)
-        .setContent(addMemoriesLinkLarge)
+        .setContent(popupContent)
         .openOn(map);
 
     $('#addMemoriesLink').on('click', function () {
@@ -72,12 +76,14 @@ map.on('taphold', function (event) {
 
 function createMarker(souvenir) {
     var marker = L.marker([souvenir.lat, souvenir.lng]).addTo(map);
-    
-    // Ajustez la valeur de maxWidth selon vos besoins
-    var maxWidth = L.Browser.mobile ? 2000 : 800;
 
-    marker.bindPopup(souvenir.message, { maxWidth: maxWidth });
-    
+    var popupContent = '<div class="popup-content">' + souvenir.message + '</div>';
+
+    // Ajustez les valeurs de maxWidth selon vos besoins
+    var maxWidth = L.Browser.mobile ? 300 : 600;
+
+    marker.bindPopup(popupContent, { maxWidth: maxWidth });
+
     marker.on('click', function () {
         // Afficher la bulle/fenêtre de lecture sans rediriger vers le formulaire
         marker.openPopup();
