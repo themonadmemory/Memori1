@@ -10,8 +10,8 @@ var souvenirs = [
 ];
 
 var manualMemories = [
-    { lat: 38.907, lng: -77.037, message: "Mémoire 1" },
-    { lat: 34.0522, lng: -118.2437, message: "Mémoire 2" }
+    { lat: 38.907, lng: -77.037, message: "Alpha test" },
+    { lat: 34.0522, lng: -118.2437, message: "Beta test" }
     // Ajoutez d'autres souvenirs manuels au besoin
 ];
 
