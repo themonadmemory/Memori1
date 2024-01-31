@@ -10,33 +10,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- Styles pour la fenêtre modale -->
     <style>
-        #introModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            text-align: center;
-        }
-
-        .close-btn {
-            cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
         /* Masquer le lien vers Leaflet avec le logo ukrainien */
         .leaflet-control-attribution {
             display: none;
@@ -44,17 +17,6 @@
     </style>
 </head>
 <body>
-    <!-- Fenêtre modale d'introduction -->
-    <div id="introModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">×</span>
-            <h2>Welcome to MEMORIA</h2>
-            <p>Explore and share memories around the world. Click on the map to add your own memories!</p>
-            <a href="https://twitter.com/Crash_113589311" target="_blank" class="button">Follow us on Twitter</a>
-            <button onclick="closeModalAndEnter()">Enter MEMORIA</button>
-        </div>
-    </div>
-
     <!-- Carte Interactive -->
     <section id="interactive-map"></section>
 
@@ -62,10 +24,11 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
 
-    <!-- Script pour afficher la fenêtre modale à l'ouverture -->
+    <!-- Script pour afficher la fenêtre modale à l'ouverture (commenté pour désactiver) -->
+    <!--
     <script>
         $(document).ready(function() {
-            openModal(); // Afficher la fenêtre modale à l'ouverture
+            // openModal(); // Commentez cette ligne pour supprimer l'affichage initial de la fenêtre modale
         });
 
         function openModal() {
@@ -81,5 +44,6 @@
             // Ajoutez ici le code pour activer l'accès à la carte et aux fonctionnalités du site
         }
     </script>
+    -->
 </body>
 </html>
