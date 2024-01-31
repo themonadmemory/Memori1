@@ -36,6 +36,8 @@ function sendMemory() {
             console.log('E-mail sent successfully:', response);
             // Afficher un message de confirmation à l'utilisateur
             alert('Your memory has been sent successfully!');
+            // Rediriger vers la page index.html
+            window.location.href = 'index.html';
         },
         function(error) {
             console.log('Error sending e-mail:', error);
