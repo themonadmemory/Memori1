@@ -4,10 +4,11 @@ $(document).ready(function() {
     var lng = urlParams.get('lng');
 
     if (lat !== null && lng !== null) {
-        $('#coordinates').val('Lat: ' + lat + ', Lng: ' + lng);
+        $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
     }
 
-    $('#sendMemoryButton').on('click', function() {
+    // Détachez d'abord l'événement de clic existant pour éviter les duplications
+    $('#sendMemoryButton').off('click').on('click', function() {
         sendMemory();
     });
 
@@ -25,23 +26,21 @@ function fillFormWithCoordinates(lat, lng) {
 }
 
 function sendMemory() {
-    var coordinates = $('#coordinates').val();
     var memoryText = $('#memoryText').val();
 
-    emailjs.send("service_f48v2un", "template_vxz0hml", {
-        coordinates: coordinates,
+    // Remplacez "votre_service_id_emailjs" et "votre_template_id_emailjs" par vos identifiants
+    emailjs.sendForm("service_f48v2un", "template_vxz0hml", {
         memoryText: memoryText
     }).then(
         function(response) {
             console.log('E-mail sent successfully:', response);
-            // Ajoutez ici toute logique supplémentaire après l'envoi réussi
+            // Afficher un message de confirmation à l'utilisateur
+            alert('Your memory has been sent successfully!');
         },
         function(error) {
             console.log('Error sending e-mail:', error);
-            // Ajoutez ici toute logique supplémentaire en cas d'erreur
-
-            // Affichez les détails de l'erreur dans une alerte pour un débogage rapide
-            alert('Error sending e-mail: ' + JSON.stringify(error));
+            // Afficher un message d'erreur à l'utilisateur
+            alert('Error sending your memory. Please try again later.');
         }
     );
 }
