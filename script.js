@@ -6,6 +6,7 @@ const addMemoriesLinkLarge = '<p id="addMemoriesLink" style="font-size: 18px; te
 var souvenirs = [
     { lat: 40.7128, lng: -74.0060, message: "Statue de la Liberté" },
     { lat: 34.0522, lng: -118.2437, message: "Hollywood Sign" }
+    { Lat= 40.350606065486744, Lng=-77.5634238370936, message: "test" }
     // Ajoutez d'autres souvenirs fictifs au besoin
 ];
 
