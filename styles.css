@@ -59,6 +59,6 @@ header {
 /* Styles spécifiques aux popups sur mobile */
 @media only screen and (max-width: 767px) {
     .leaflet-popup-content-wrapper {
-        font-size: 18px; /* Augmentez la taille de la police pour les écrans mobiles si nécessaire */
+        font-size: 33px; /* Augmentez la taille de la police pour les écrans mobiles si nécessaire */
     }
 }
