@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -52,4 +54,11 @@ header {
 .leaflet-label {
     font-size: 16px; /* ou toute autre taille souhaitée */
     font-weight: bold; /* ou tout autre style de police souhaité */
+}
+
+/* Styles spécifiques aux popups sur mobile */
+@media only screen and (max-width: 767px) {
+    .leaflet-popup-content-wrapper {
+        font-size: 18px; /* Augmentez la taille de la police pour les écrans mobiles si nécessaire */
+    }
 }
