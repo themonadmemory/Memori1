@@ -6,6 +6,7 @@ const addMemoriesLinkLarge = '<p id="addMemoriesLink" style="font-size: 18px; te
 var souvenirs = [
     { lat: 40.7128, lng: -74.0060, message: "Statue de la Liberté" },
     { lat: 34.0522, lng: -118.2437, message: "Hollywood Sign" }
+    
     // Ajoutez d'autres souvenirs fictifs au besoin
 ];
 
@@ -33,7 +34,7 @@ manualMemories.forEach(function (memory) {
 map.on('contextmenu', function (event) {
     lastClickedCoords = event.latlng;
 
-    var popupContent = L.Browser.mobile ? addMemoriesLinkLarge : addMemoriesLink;
+    var popupContent = isMobile() ? addMemoriesLinkLarge : addMemoriesLink;
 
     var popup = L.popup()
         .setLatLng(event.latlng)
@@ -55,7 +56,7 @@ map.on('contextmenu', function (event) {
 map.on('taphold', function (event) {
     lastClickedCoords = event.latlng;
 
-    var popupContent = L.Browser.mobile ? addMemoriesLinkLarge : addMemoriesLink;
+    var popupContent = isMobile() ? addMemoriesLinkLarge : addMemoriesLink;
 
     var popup = L.popup()
         .setLatLng(event.latlng)
@@ -76,14 +77,7 @@ map.on('taphold', function (event) {
 
 function createMarker(souvenir) {
     var marker = L.marker([souvenir.lat, souvenir.lng]).addTo(map);
-
-    var popupContent = '<div class="popup-content">' + souvenir.message + '</div>';
-
-    // Ajustez les valeurs de maxWidth selon vos besoins
-    var maxWidth = L.Browser.mobile ? 300 : 600;
-
-    marker.bindPopup(popupContent, { maxWidth: maxWidth });
-
+    marker.bindPopup(souvenir.message);
     marker.on('click', function () {
         // Afficher la bulle/fenêtre de lecture sans rediriger vers le formulaire
         marker.openPopup();
@@ -100,4 +94,8 @@ function fillFormWithCoordinates(lat, lng) {
 function redirectToForm() {
     // Rediriger vers le formulaire seulement si la fenêtre "Add your memories here" est cliquée
     window.location.href = 'submit_memory.html?lat=' + lastClickedCoords.lat + '&lng=' + lastClickedCoords.lng;
+}
+
+function isMobile() {
+    return window.innerWidth <= 767;
 }
