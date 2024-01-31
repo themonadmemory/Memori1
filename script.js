@@ -73,7 +73,7 @@ map.on('taphold', function (event) {
 
 function createMarker(souvenir) {
     var marker = L.marker([souvenir.lat, souvenir.lng]).addTo(map);
-    marker.bindPopup(souvenir.message, { maxWidth: L.Browser.mobile ? 400 : 300 }); // Ajustez la valeur de maxWidth selon vos besoins
+    marker.bindPopup(souvenir.message, { maxWidth: L.Browser.mobile ? 700 : 300 }); // Ajustez la valeur de maxWidth selon vos besoins
     marker.on('click', function () {
         // Afficher la bulle/fenêtre de lecture sans rediriger vers le formulaire
         marker.openPopup();
