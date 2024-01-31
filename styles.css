@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Empêcher le défilement de la page */
+}
+
+header {
+    display: none; /* Masquer le titre */
+}
+
+#leader {
+    display: none; /* Masquer le leader */
+}
+
+#button-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px;
+    margin-right: 10px;
+    background-color: #1b1b1b;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+#interactive-map {
+    height: 100vh; /* Hauteur de la fenêtre */
+    width: 100vw; /* Largeur de la fenêtre */
+}
+
+/* Styles pour les popups Leaflet */
+.leaflet-popup-content {
+    max-width: 300px; /* Définissez la largeur maximale souhaitée */
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #fff; /* Couleur de fond */
+    color: #333; /* Couleur du texte */
+    font-size: 14px; /* Taille de la police */
+    padding: 10px; /* Espacement interne */
+}
+
+/* Styles pour les labels Leaflet */
+.leaflet-label {
+    font-size: 16px; /* ou toute autre taille souhaitée */
+    font-weight: bold; /* ou tout autre style de police souhaité */
+}
