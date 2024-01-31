@@ -74,7 +74,7 @@ function createMarker(souvenir) {
     var marker = L.marker([souvenir.lat, souvenir.lng]).addTo(map);
     
     // Ajustez la valeur de maxWidth selon vos besoins
-    var maxWidth = L.Browser.mobile ? 600 : 300;
+    var maxWidth = L.Browser.mobile ? 2000 : 800;
 
     marker.bindPopup(souvenir.message, { maxWidth: maxWidth });
     
