@@ -4,8 +4,7 @@ const addMemoriesLink = '<p id="addMemoriesLink" class="popup-link">Add your mem
 const addMemoriesLinkLarge = '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>';
 
 var souvenirs = [
-    { lat: 40.7128, lng: -74.0060, message: "Statue de la Liberté" },
-    { lat: 34.0522, lng: -118.2437, message: "Hollywood Sign" }
+  
     
     // Ajoutez d'autres souvenirs fictifs au besoin
 ];
