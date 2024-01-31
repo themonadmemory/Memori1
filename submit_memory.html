@@ -5,10 +5,68 @@
     <title>Submit Memory</title>
     <link rel="stylesheet" href="form_styles.css">
     <style>
-        /* Votre style CSS reste inchangé */
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #000; /* Couleur de fond noire */
+        }
+
+        #background {
+            position: fixed;
+            width: 150%;
+            height: 150%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #background iframe {
+            width: 100vw;
+            height: 100vh;
+            object-fit: fill; /* Ajustez cette propriété pour rognage/zoom */
+        }
+
+        #form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000; /* Couleur de fond noire */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            color: #fff; /* Couleur du texte blanc */
+        }
+
+        h1, label, textarea, p, button {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Inclusion de la bibliothèque EmailJS -->
+    <script src="email.js"></script>
+    <script src="form_script.js"></script>
 </head>
 <body>
     <!-- Gif en fond d'écran -->
@@ -34,37 +92,6 @@
     </div>
 
     <script>
-        // Initialise EmailJS avec votre identifiant utilisateur
-        emailjs.init("user_your_emailjs_user_id");
-
-        // Fonction pour pré-remplir le champ texte avec les coordonnées
-        function fillFormWithCoordinates(lat, lng) {
-            var memoryText = 'Coordinates: Lat=' + lat + ', Lng=' + lng + ' (' + lat + ', ' + lng + ')';
-            $('#memoryText').val(memoryText);
-        }
-
-        // Fonction pour envoyer la mémoire par e-mail
-        function sendMemory() {
-            var memoryText = $('#memoryText').val();
-
-            // Remplacez "service_your_emailjs_service_id" et "template_your_emailjs_template_id" par vos identifiants
-            emailjs.sendForm("service_f48v2un", "template_vxz0hml", {
-                memoryText: memoryText
-            }).then(
-                function(response) {
-                    console.log('E-mail sent successfully:', response);
-                    // Ajoutez ici toute logique supplémentaire après l'envoi réussi
-                },
-                function(error) {
-                    console.log('Error sending e-mail:', error);
-                    // Ajoutez ici toute logique supplémentaire en cas d'erreur
-
-                    // Affichez les détails de l'erreur dans une alerte pour un débogage rapide
-                    alert('Error sending e-mail: ' + JSON.stringify(error));
-                }
-            );
-        }
-
         $(document).ready(function() {
             // Récupérer les paramètres d'URL (lat et lng)
             var urlParams = new URLSearchParams(window.location.search);
