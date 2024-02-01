@@ -18,7 +18,8 @@ var map;
 var satelliteLayer;
 
 // Remplacez YOUR_API_KEY par votre clé d'API ArcGIS
-esriConfig.apiKey = "AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN";
+esriConfig.apiKey = "AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slR";
+
 
 // Créez la carte et ajoutez la couche de tuiles satellite d'Esri
 const arcgisMap = new Map({
