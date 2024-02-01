@@ -10,7 +10,6 @@ var souvenirs = [
 var manualMemories = [
     { lat: -21.2426, lng: 55.7064, message: "Welcome to MEMORIA, where the first memory is the beginning of a collective story. Monad" },
     { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
-    
     // Ajoutez d'autres souvenirs manuels au besoin
 ];
 
@@ -18,6 +17,12 @@ var lastClickedCoords;
 var map = L.map('interactive-map');
 map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// Ajoutez la couche de tuiles satellite d'Esri
+var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: '© Esri',
+    maxZoom: 18
+}).addTo(map);
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
