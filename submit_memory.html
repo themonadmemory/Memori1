@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Submit Memory</title>
     <link rel="stylesheet" href="form_styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     <style>
         body {
             margin: 0;
@@ -42,7 +44,11 @@
             color: #000; /* Couleur du texte noir */
         }
 
-        h1, label, textarea, p, button {
+        h1,
+        label,
+        textarea,
+        p,
+        button {
             display: block;
             margin-bottom: 15px;
             color: #000; /* Couleur du texte noir */
@@ -89,13 +95,16 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Inclusion de la bibliothèque EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="email.js"></script>
     <script src="form_script.js"></script>
 </head>
+
 <body>
     <!-- Gif en fond d'écran -->
     <div id="background">
-        <iframe src="https://giphy.com/embed/pGa3r86JE5UArWQB7G" frameborder="0" class="giphy-embed" allowFullScreen></iframe>
+        <iframe src="https://giphy.com/embed/pGa3r86JE5UArWQB7G" frameborder="0" class="giphy-embed"
+            allowFullScreen></iframe>
     </div>
 
     <!-- Conteneur du formulaire -->
@@ -104,7 +113,8 @@
             <!-- Champ texte pour le corps du texte -->
             <label for="memoryText">Your Memory:</label>
             <textarea id="memoryText" name="memoryText" rows="4" cols="50" required></textarea>
-            <p style="font-size: 14px; color: #555;">Please write a memory that corresponds to the provided coordinates. Do not remove the coordinates to ensure your memory is valid.</p>
+            <p style="font-size: 14px; color: #555;">Please write a memory that corresponds to the provided coordinates.
+                Do not remove the coordinates to ensure your memory is valid.</p>
             <button type="button" id="sendMemoryButton">Send Your Memory</button>
 
             <!-- Message de confirmation -->
@@ -118,7 +128,7 @@
     </div>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Récupérer les paramètres d'URL (lat et lng)
             var urlParams = new URLSearchParams(window.location.search);
             var lat = urlParams.get('lat');
@@ -130,15 +140,9 @@
                 $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
             }
 
-            $('#sendMemoryButton').on('click', function() {
+            $('#sendMemoryButton').on('click', function () {
                 // Appeler la fonction pour envoyer la mémoire
                 sendMemory();
-            });
-
-            // Désactiver le comportement par défaut du lien "Back to Map"
-            $('#form-container a').on('click', function(event) {
-                event.preventDefault();
-                // Votre logique pour retourner à la carte
             });
         });
 
@@ -150,4 +154,5 @@
         }
     </script>
 </body>
+
 </html>
