@@ -25,7 +25,8 @@
         #background iframe {
             width: 100vw;
             height: 100vh;
-            object-fit: fill; /* Ajustez cette propriété pour rognage/zoom */
+            object-fit: cover;
+            transform: scale(1.2); /* Ajustez la valeur pour zoomer davantage (1.2 est un exemple) */
         }
 
         #form-container {
@@ -44,6 +45,7 @@
         h1, label, textarea, p, button {
             display: block;
             margin-bottom: 15px;
+            color: #fff; /* Couleur du texte blanc */
         }
 
         textarea {
@@ -100,7 +102,7 @@
 
             // Afficher les coordonnées dans le champ texte (peut être masqué si nécessaire)
             if (lat !== null && lng !== null) {
-                $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
+                fillFormWithCoordinates(lat, lng);
             }
 
             $('#sendMemoryButton').on('click', function() {
