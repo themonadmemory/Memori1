@@ -3,9 +3,11 @@ $(document).ready(function() {
     var lat = urlParams.get('lat');
     var lng = urlParams.get('lng');
 
+   // Afficher les coordonnées dans le champ texte (peut être masqué si nécessaire)
     if (lat !== null && lng !== null) {
-        $('#coordinates').val('Lat: ' + lat + ', Lng: ' + lng);
-    }
+    // Remplacer l'appel à fillFormWithCoordinates par le code direct ici
+    $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
+}
 
     $('#sendMemoryButton').on('click', function() {
         sendMemory();
