@@ -14,17 +14,36 @@ var manualMemories = [
 ];
 
 var lastClickedCoords;
-var map = L.map('interactive-map');
-map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+var map;
+var satelliteLayer;
 
-// Ajoutez la couche de tuiles satellite d'Esri
-// Remplacez 'VOTRE_CLE' par votre clé d'accès ArcGIS
-var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN', {
+// Remplacez YOUR_API_KEY par votre clé d'API ArcGIS
+esriConfig.apiKey = "AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN";
+
+// Créez la carte et ajoutez la couche de tuiles satellite d'Esri
+const arcgisMap = new Map({
+    basemap: "arcgis-topographic" // Couche de fond de carte
+});
+
+const view = new MapView({
+    map: arcgisMap,
+    center: [-21.2426, 55.7064], // Remplacez ces coordonnées par celles que vous souhaitez
+    zoom: 4, // Niveau de zoom initial
+    container: "interactive-map", // ID du conteneur
+    constraints: {
+        snapToZoom: false
+    }
+});
+
+// Créez une couche de tuiles satellite d'Esri
+satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN', {
     attribution: '© Esri',
     maxZoom: 18
-}).addTo(map);
+});
 
+// Créez une carte Leaflet et ajoutez la couche de tuiles satellite
+map = L.map('interactive-map').setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
+satelliteLayer.addTo(map);
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
