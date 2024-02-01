@@ -114,18 +114,34 @@
 
             // Afficher les coordonnées dans le champ texte (peut être masqué si nécessaire)
             if (lat !== null && lng !== null) {
-                // Remplacer l'appel à fillFormWithCoordinates par le code direct ici
                 $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
             }
 
             $('#sendMemoryButton').on('click', function () {
-                // Appeler la fonction pour envoyer la mémoire
-                sendMemory();
+                sendMemory(lat, lng);
             });
         });
 
-        function sendMemory() {
-            // ... (Votre logique d'envoi de mémoire)
+        function sendMemory(lat, lng) {
+            var coordinates = 'Lat=' + lat + ', Lng=' + lng;
+            var memoryText = $('#memoryText').val();
+
+            emailjs.send("service_f48v2un", "template_vxz0hml", {
+                coordinates: coordinates,
+                memoryText: memoryText
+            }).then(
+                function (response) {
+                    console.log('E-mail sent successfully:', response);
+                    // Ajoutez ici toute logique supplémentaire après l'envoi réussi
+                },
+                function (error) {
+                    console.log('Error sending e-mail:', error);
+                    // Ajoutez ici toute logique supplémentaire en cas d'erreur
+
+                    // Affichez les détails de l'erreur dans une alerte pour un débogage rapide
+                    alert('Error sending e-mail: ' + JSON.stringify(error));
+                }
+            );
         }
     </script>
 </body>
