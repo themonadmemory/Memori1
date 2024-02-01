@@ -21,12 +21,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
-    createMarker(souvenir);
+    createMarker(souvenir, false);
 });
 
 // Ajoutez les souvenirs manuels
-manualMemories.forEach(function (memory) {
-    createMarker(memory);
+manualMemories.forEach(function (memory, index) {
+    createMarker(memory, index === 0);
 });
 
 map.on('contextmenu', function (event) {
@@ -73,8 +73,10 @@ map.on('taphold', function (event) {
     });
 });
 
-function createMarker(souvenir) {
-    var marker = L.marker([souvenir.lat, souvenir.lng]).addTo(map);
+function createMarker(souvenir, isFirstMarker) {
+    var markerColor = isFirstMarker ? 'black' : 'blue'; // Noir pour le premier, bleu pour les autres
+    var marker = L.marker([souvenir.lat, souvenir.lng], { icon: L.divIcon({ className: 'custom-marker', iconSize: [20, 20], html: '<i style="color:' + markerColor + ';" class="fas fa-map-marker-alt"></i>' }) }).addTo(map);
+
     marker.bindPopup(souvenir.message);
     marker.on('click', function () {
         // Afficher la bulle/fenêtre de lecture sans rediriger vers le formulaire
