@@ -5,15 +5,15 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow: hidden; /* Empêcher le défilement de la page */
+    overflow: hidden;
 }
 
 header {
-    display: none; /* Masquer le titre */
+    display: none;
 }
 
 #leader {
-    display: none; /* Masquer le leader */
+    display: none;
 }
 
 #button-container {
@@ -34,31 +34,28 @@ header {
 }
 
 #interactive-map {
-    height: 100vh; /* Hauteur de la fenêtre */
-    width: 100vw; /* Largeur de la fenêtre */
+    height: 500px;
+    width: 100%;
 }
 
-/* Styles pour les popups Leaflet */
 .leaflet-popup-content {
-    max-width: 300px; /* Définissez la largeur maximale souhaitée */
+    max-width: 300px;
 }
 
 .leaflet-popup-content-wrapper {
-    background-color: #fff; /* Couleur de fond */
-    color: #333; /* Couleur du texte */
-    font-size: 14px; /* Taille de la police */
-    padding: 10px; /* Espacement interne */
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    padding: 10px;
 }
 
-/* Styles pour les labels Leaflet */
 .leaflet-label {
-    font-size: 16px; /* ou toute autre taille souhaitée */
-    font-weight: bold; /* ou tout autre style de police souhaité */
+    font-size: 16px;
+    font-weight: bold;
 }
 
-/* Styles spécifiques aux popups sur mobile */
 @media only screen and (max-width: 767px) {
     .leaflet-popup-content-wrapper {
-        font-size: 33px; /* Augmentez la taille de la police pour les écrans mobiles si nécessaire */
+        font-size: 14px;
     }
 }
