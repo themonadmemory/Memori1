@@ -8,7 +8,7 @@ var souvenirs = [
 ];
 
 var manualMemories = [
-    { lat: -21.2426, lng: 55.7064, message: "Welcome to MEMORIA, where the first memory is the beginning of a collective story. Monad" },
+    { lat: -20.3975, lng: 56.4365, message: "Welcome to MEMORIA, where the first memory is the beginning of a collective story. Monad" },
     { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
     
     // Ajoutez d'autres souvenirs manuels au besoin
