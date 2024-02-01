@@ -8,13 +8,24 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #interactive-map {
+            height: 100vh;
+            width: 100%;
+        }
+
         .leaflet-control-attribution {
             display: none;
         }
     </style>
 </head>
 <body>
-    <section id="interactive-map" style="height: 500px; width: 100%;"></section>
+    <section id="interactive-map"></section>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
