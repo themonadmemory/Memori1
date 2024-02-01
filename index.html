@@ -4,46 +4,19 @@
     <meta charset="UTF-8">
     <title>MEMORIA</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Inclusion de la bibliothèque Leaflet.js pour la carte -->
+    <link href='https://api.mapbox.com/mapbox-2.0.1/mapbox.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <!-- Inclusion de jQuery depuis un CDN -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <!-- Styles pour la fenêtre modale -->
     <style>
-        /* Masquer le lien vers Leaflet avec le logo ukrainien */
         .leaflet-control-attribution {
             display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Carte Interactive -->
-    <section id="interactive-map"></section>
+    <section id="interactive-map" style="height: 500px; width: 100%;"></section>
 
-    <!-- Scripts JavaScript -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
-
-    <!-- Script pour afficher la fenêtre modale à l'ouverture (commenté pour désactiver) -->
-    <!--
-    <script>
-        $(document).ready(function() {
-            // openModal(); // Commentez cette ligne pour supprimer l'affichage initial de la fenêtre modale
-        });
-
-        function openModal() {
-            $("#introModal").fadeIn();
-        }
-
-        function closeModal() {
-            $("#introModal").fadeOut();
-        }
-
-        function closeModalAndEnter() {
-            closeModal();
-            // Ajoutez ici le code pour activer l'accès à la carte et aux fonctionnalités du site
-        }
-    </script>
-    -->
 </body>
 </html>
