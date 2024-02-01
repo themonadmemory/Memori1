@@ -6,6 +6,7 @@ body {
     padding: 0;
     height: 100vh;
     overflow: hidden;
+    background-color: #000; /* Ajout d'une couleur de fond noire à la page */
 }
 
 header {
@@ -34,12 +35,16 @@ header {
 }
 
 #interactive-map {
-    height: 500px;
+    height: 100vh;
     width: 100%;
+    border: 2px solid #fff; /* Ajout d'une bordure blanche à la carte */
+    border-radius: 10px; /* Ajout des coins arrondis à la carte */
+    overflow: hidden; /* Assurez-vous que la carte ne dépasse pas les limites du conteneur */
 }
 
 .leaflet-popup-content {
     max-width: 300px;
+    color: #000; /* Changement de la couleur du texte de la popup en noir */
 }
 
 .leaflet-popup-content-wrapper {
