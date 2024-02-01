@@ -4,8 +4,6 @@ const addMemoriesLink = '<p id="addMemoriesLink" class="popup-link">Add your mem
 const addMemoriesLinkLarge = '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>';
 
 var souvenirs = [
-  
-    
     // Ajoutez d'autres souvenirs fictifs au besoin
 ];
 
