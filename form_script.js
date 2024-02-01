@@ -15,6 +15,14 @@ $(document).ready(function() {
         // Appeler une fonction pour pré-remplir le formulaire avec les coordonnées
         fillFormWithCoordinates(lat, lng);
     });
+
+    // Optionnel : Masquer les coordonnées par défaut
+    // $('#memoryText').hide();
+
+    // Optionnel : Afficher les coordonnées si nécessaire
+    // $('#showCoordinatesButton').on('click', function() {
+    //     $('#memoryText').show();
+    // });
 });
 
 function fillFormWithCoordinates(lat, lng) {
