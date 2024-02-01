@@ -43,11 +43,7 @@
             color: #000; /* Couleur du texte noir */
         }
 
-        h1,
-        label,
-        textarea,
-        p,
-        button {
+        h1, label, textarea, p, button {
             display: block;
             margin-bottom: 15px;
             color: #000; /* Couleur du texte noir */
@@ -76,17 +72,6 @@
             background-color: #45a049;
         }
 
-        /* Nouveau style pour l'effet d'apparition */
-        #confirmation-message {
-            display: none;
-            background-color: #45a049;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            text-align: center;
-        }
-
         /* Style pour supprimer le soulignement du texte du bouton du formulaire */
         #form-container a {
             text-decoration: none;
@@ -101,8 +86,7 @@
 <body>
     <!-- Gif en fond d'écran -->
     <div id="background">
-        <iframe src="https://giphy.com/embed/pGa3r86JE5UArWQB7G" frameborder="0" class="giphy-embed"
-            allowFullScreen></iframe>
+        <iframe src="https://giphy.com/embed/pGa3r86JE5UArWQB7G" frameborder="0" class="giphy-embed" allowFullScreen></iframe>
     </div>
 
     <!-- Conteneur du formulaire -->
@@ -111,12 +95,8 @@
             <!-- Champ texte pour le corps du texte -->
             <label for="memoryText">Your Memory:</label>
             <textarea id="memoryText" name="memoryText" rows="4" cols="50" required></textarea>
-            <p style="font-size: 14px; color: #555;">Please write a memory that corresponds to the provided coordinates.
-                Do not remove the coordinates to ensure your memory is valid.</p>
+            <p style="font-size: 14px; color: #555;">Please write a memory that corresponds to the provided coordinates. Do not remove the coordinates to ensure your memory is valid.</p>
             <button type="button" id="sendMemoryButton">Send Your Memory</button>
-
-            <!-- Message de confirmation -->
-            <div id="confirmation-message">Thank you Ahoï !!! We will add your memory on the map asap</div>
         </form>
 
         <!-- Bouton de retour à la carte -->
@@ -146,12 +126,6 @@
 
         function sendMemory() {
             // ... (Votre logique d'envoi de mémoire)
-
-            // Afficher le message de confirmation
-            $('#confirmation-message').fadeIn().delay(2000).fadeOut();
-
-            // Afficher une boîte de dialogue d'alerte
-            alert('Memory sent successfully!');
         }
     </script>
 </body>
