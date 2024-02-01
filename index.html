@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>MEMORIA</title>
     <link rel="stylesheet" href="styles.css">
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
@@ -31,8 +30,72 @@
 <body>
     <section id="interactive-map"></section>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://js.arcgis.com/4.24/"></script> <!-- Ajout de l'API ArcGIS -->
-    <script src="script.js"></script>
+    <script src="https://js.arcgis.com/4.24/"></script>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/ImageryLayer",
+            "esri/config",
+            "dojo/domReady!"
+        ], function (Map, MapView, ImageryLayer, esriConfig) {
+            // Remplacez YOUR_API_KEY par votre clé d'API ArcGIS
+            esriConfig.apiKey = "AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN";
+
+            var manualMemories = [
+                { lat: -21.2426, lng: 55.7064, message: "Welcome to MEMORIA, where the first memory is the beginning of a collective story. Monad" },
+                { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." }
+                // Ajoutez d'autres souvenirs manuels au besoin
+            ];
+
+            var lastClickedCoords;
+
+            var arcgisMap = new Map({
+                basemap: "topo" // Utilisez "topo" comme couche de fond de carte
+            });
+
+            var view = new MapView({
+                map: arcgisMap,
+                center: [-21.2426, 55.7064], // Remplacez ces coordonnées par celles que vous souhaitez
+                zoom: 4, // Niveau de zoom initial
+                container: "interactive-map", // ID du conteneur
+                constraints: {
+                    snapToZoom: false
+                }
+            });
+
+            // Ajoutez la couche de tuiles satellite d'Esri
+            var satelliteLayer = new ImageryLayer({
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
+            });
+
+            // Ajoutez la couche de tuiles satellite à la carte
+            arcgisMap.add(satelliteLayer);
+
+            // Ajoutez les souvenirs manuels
+            manualMemories.forEach(function (memory) {
+                createMarker(memory);
+            });
+
+            view.on('click', function (event) {
+                lastClickedCoords = {
+                    lat: event.mapPoint.latitude,
+                    lng: event.mapPoint.longitude
+                };
+
+                var popupContent = isMobile() ? addMemoriesLinkLarge : addMemoriesLink;
+
+                // Ajoutez votre logique de popup ici
+            });
+
+            function createMarker(memory) {
+                // Ajoutez votre logique pour créer des marqueurs ici
+            }
+
+            function isMobile() {
+                return window.innerWidth <= 767;
+            }
+        });
+    </script>
 </body>
 </html>
