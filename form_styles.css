@@ -60,7 +60,7 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Ajoutez des styles pour le bouton "Back to Map" si nécessaire */
-a button {
-    /* Ajoutez des styles personnalisés au besoin */
+/* Ajoutez cette règle CSS pour supprimer le soulignement du texte du bouton de retour à la carte */
+#form-container a {
+    text-decoration: none;
 }
