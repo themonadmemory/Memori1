@@ -134,6 +134,12 @@
                 // Appeler la fonction pour envoyer la mémoire
                 sendMemory();
             });
+
+            // Désactiver le comportement par défaut du lien "Back to Map"
+            $('#form-container a').on('click', function(event) {
+                event.preventDefault();
+                // Votre logique pour retourner à la carte
+            });
         });
 
         function sendMemory() {
