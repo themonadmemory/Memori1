@@ -1,6 +1,66 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background-color: #000; /* Couleur de fond noire */
+}
+
+#background {
+    position: fixed;
+    width: 150%;
+    height: 150%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 #background iframe {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
     transform: scale(1.2); /* Ajustez la valeur pour zoomer davantage (1.2 est un exemple) */
+}
+
+#form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000; /* Couleur de fond noire */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    color: #fff; /* Couleur du texte blanc */
+}
+
+h1, label, textarea, p, button {
+    display: block;
+    margin-bottom: 15px;
+    color: #fff; /* Couleur du texte blanc */
+}
+
+textarea {
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Ajoutez des styles pour le bouton "Back to Map" si nécessaire */
+a button {
+    /* Ajoutez des styles personnalisés au besoin */
 }
