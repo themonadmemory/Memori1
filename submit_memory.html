@@ -48,6 +48,11 @@
             color: #fff; /* Couleur du texte blanc */
         }
 
+        /* Style spécifique pour les coordonnées (en noir) */
+        label.coordinates {
+            color: #000; /* Couleur du texte noir */
+        }
+
         textarea {
             width: 100%;
         }
@@ -63,6 +68,17 @@
 
         button:hover {
             background-color: #45a049;
+        }
+
+        /* Nouveau style pour l'effet d'apparition */
+        #confirmation-message {
+            display: none;
+            background-color: #45a049;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -85,6 +101,9 @@
             <textarea id="memoryText" name="memoryText" rows="4" cols="50" required></textarea>
             <p style="font-size: 14px; color: #555;">Please write a memory that corresponds to the provided coordinates. Do not remove the coordinates to ensure your memory is valid.</p>
             <button type="button" id="sendMemoryButton">Send Your Memory</button>
+
+            <!-- Message de confirmation -->
+            <div id="confirmation-message">Thank you Ahoï !!! We will add your memory on the map asap</div>
         </form>
 
         <!-- Bouton de retour à la carte -->
@@ -110,6 +129,13 @@
                 sendMemory();
             });
         });
+
+        function sendMemory() {
+            // ... (Votre logique d'envoi de mémoire)
+
+            // Afficher le message de confirmation
+            $('#confirmation-message').fadeIn().delay(2000).fadeOut();
+        }
     </script>
 </body>
 </html>
