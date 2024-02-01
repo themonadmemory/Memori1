@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://js.arcgis.com/4.24/"></script> <!-- Ajout de l'API ArcGIS -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body {
@@ -32,6 +33,24 @@
     <section id="interactive-map"></section>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Remplacez YOUR_API_KEY par votre clé d'API ArcGIS
+            esriConfig.apiKey = "AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN";
+
+            const map = new L.Map('interactive-map').setView([-21.2426, 55.7064], 4);
+
+            // Ajoutez la couche de tuiles satellite d'Esri
+            // Remplacez 'VOTRE_CLE' par votre clé d'accès ArcGIS
+            var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN', {
+                attribution: '© Esri',
+                maxZoom: 18
+            }).addTo(map);
+
+            // ... (Le reste de votre script.js)
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
