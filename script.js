@@ -19,10 +19,12 @@ map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur l
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // Ajoutez la couche de tuiles satellite d'Esri
-var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+// Remplacez 'VOTRE_CLE' par votre clé d'accès ArcGIS
+var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN', {
     attribution: '© Esri',
     maxZoom: 18
 }).addTo(map);
+
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
