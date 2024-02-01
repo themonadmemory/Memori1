@@ -39,13 +39,13 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 1;
-            color: #fff; /* Couleur du texte fff */
+            color: #fff; /* Couleur du texte blanc */
         }
 
         h1, label, textarea, p, button {
             display: block;
             margin-bottom: 15px;
-            color: #000; /* Couleur du texte noir */
+            color: #fff; /* Couleur du texte blanc */
         }
 
         /* Style spécifique pour les coordonnées (en noir) */
@@ -121,7 +121,8 @@
 
             // Afficher les coordonnées dans le champ texte (peut être masqué si nécessaire)
             if (lat !== null && lng !== null) {
-                fillFormWithCoordinates(lat, lng);
+                // Remplacer l'appel à fillFormWithCoordinates par le code direct ici
+                $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
             }
 
             $('#sendMemoryButton').on('click', function() {
