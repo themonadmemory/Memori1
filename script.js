@@ -14,7 +14,8 @@ var manualMemories = [
 ];
 
 var lastClickedCoords;
-var map = L.map('interactive-map').setView([40, -95], 4);
+var map = L.map('interactive-map');
+map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // Ajoutez les souvenirs existants
