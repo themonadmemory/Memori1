@@ -10,41 +10,14 @@ var souvenirs = [
 var manualMemories = [
     { lat: -21.2426, lng: 55.7064, message: "Welcome to MEMORIA, where the first memory is the beginning of a collective story. Monad" },
     { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
+    
     // Ajoutez d'autres souvenirs manuels au besoin
 ];
 
 var lastClickedCoords;
-var map;
-var satelliteLayer;
-
-// Remplacez YOUR_API_KEY par votre clé d'API ArcGIS
-esriConfig.apiKey = "AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slR";
-
-
-// Créez la carte et ajoutez la couche de tuiles satellite d'Esri
-const arcgisMap = new Map({
-    basemap: "arcgis-topographic" // Couche de fond de carte
-});
-
-const view = new MapView({
-    map: arcgisMap,
-    center: [-21.2426, 55.7064], // Remplacez ces coordonnées par celles que vous souhaitez
-    zoom: 4, // Niveau de zoom initial
-    container: "interactive-map", // ID du conteneur
-    constraints: {
-        snapToZoom: false
-    }
-});
-
-// Créez une couche de tuiles satellite d'Esri
-satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=AAPK0c6e0245584d48d29c34a7bc7df9e0cahg9dhmsyGMepmzzXz2avzAcwwvews96RpSYHTO_XsnKS9faSdbTR_slRqpDsuueN', {
-    attribution: '© Esri',
-    maxZoom: 18
-});
-
-// Créez une carte Leaflet et ajoutez la couche de tuiles satellite
-map = L.map('interactive-map').setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
-satelliteLayer.addTo(map);
+var map = L.map('interactive-map');
+map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
