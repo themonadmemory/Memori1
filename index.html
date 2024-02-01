@@ -69,7 +69,7 @@
         map.on('contextmenu', function (event) {
             lastClickedCoords = event.latlng;
 
-            addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Add your memories here</p>';
+            addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Click to add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Click to add your memories here</p>';
 
             var popup = L.popup()
                 .setLatLng(event.latlng)
