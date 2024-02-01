@@ -1,52 +1,36 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var urlParams = new URLSearchParams(window.location.search);
     var lat = urlParams.get('lat');
     var lng = urlParams.get('lng');
 
-   // Afficher les coordonnées dans le champ texte (peut être masqué si nécessaire)
+    // Afficher les coordonnées dans le champ texte (peut être masqué si nécessaire)
     if (lat !== null && lng !== null) {
-    // Remplacer l'appel à fillFormWithCoordinates par le code direct ici
-    $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
-}
+        $('#memoryText').val('Coordinates: Lat=' + lat + ', Lng=' + lng);
+    }
 
-    $('#sendMemoryButton').on('click', function() {
-        sendMemory();
+    $('#sendMemoryButton').on('click', function () {
+        var memoryText = $('#memoryText').val();
+        if (memoryText.trim() !== '') {
+            sendMemory(lat, lng, memoryText);
+        } else {
+            alert('Please enter a memory before submitting.');
+        }
     });
-
-    $('#addMemoriesLink').on('click', function() {
-        // Appeler une fonction pour pré-remplir le formulaire avec les coordonnées
-        fillFormWithCoordinates(lat, lng);
-    });
-
-    // Optionnel : Masquer les coordonnées par défaut
-    // $('#memoryText').hide();
-
-    // Optionnel : Afficher les coordonnées si nécessaire
-    // $('#showCoordinatesButton').on('click', function() {
-    //     $('#memoryText').show();
-    // });
 });
 
-function fillFormWithCoordinates(lat, lng) {
-    // Remplir le champ texte du formulaire avec les coordonnées
-    var memoryText = 'Coordinates: Lat=' + lat + ', Lng=' + lng + ' (' + lat + ', ' + lng + ')';
-    // Vous pouvez ajouter d'autres informations ou instructions ici si nécessaire
-    $('#memoryText').val(memoryText);
-}
-
-function sendMemory() {
-    var coordinates = $('#coordinates').val();
-    var memoryText = $('#memoryText').val();
-
+function sendMemory(lat, lng, memoryText) {
+    var coordinates = 'Lat=' + lat + ', Lng=' + lng;
+    
     emailjs.send("service_f48v2un", "template_vxz0hml", {
         coordinates: coordinates,
         memoryText: memoryText
     }).then(
-        function(response) {
+        function (response) {
             console.log('E-mail sent successfully:', response);
             // Ajoutez ici toute logique supplémentaire après l'envoi réussi
+            showConfirmationMessage();
         },
-        function(error) {
+        function (error) {
             console.log('Error sending e-mail:', error);
             // Ajoutez ici toute logique supplémentaire en cas d'erreur
 
@@ -54,4 +38,10 @@ function sendMemory() {
             alert('Error sending e-mail: ' + JSON.stringify(error));
         }
     );
+}
+
+function showConfirmationMessage() {
+    // Afficher le message de confirmation
+    $('#confirmation-message').fadeIn().delay(2000).fadeOut();
+    // Ajoutez ici toute logique supplémentaire après l'affichage du message de confirmation
 }
