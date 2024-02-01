@@ -13,11 +13,15 @@ function sendMemory() {
             console.log('E-mail sent successfully:', response);
             // Afficher un message de confirmation à l'utilisateur
             alert('Your memory has been sent successfully!');
+
+            // Ajoutez ici toute logique supplémentaire après l'envoi réussi si nécessaire
         },
         function(error) {
             console.log('Error sending e-mail:', error);
             // Afficher un message d'erreur à l'utilisateur
             alert('Error sending your memory. Please try again later.');
+
+            // Ajoutez ici toute logique supplémentaire en cas d'erreur si nécessaire
         }
     );
 }
