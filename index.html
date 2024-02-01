@@ -37,9 +37,8 @@
     <script>
         // script.js
 
-        const addMemoriesLink = '<p id="addMemoriesLink" class="popup-link">Add your memories here</p>';
-        const addMemoriesLinkLarge = '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>';
-
+        var addMemoriesLink;
+        
         var souvenirs = [
             // Ajoutez d'autres souvenirs fictifs au besoin
         ];
@@ -70,11 +69,11 @@
         map.on('contextmenu', function (event) {
             lastClickedCoords = event.latlng;
 
-            var popupContent = isMobile() ? addMemoriesLinkLarge : addMemoriesLink;
+            addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Add your memories here</p>';
 
             var popup = L.popup()
                 .setLatLng(event.latlng)
-                .setContent(popupContent)
+                .setContent(addMemoriesLink)
                 .openOn(map);
 
             $('#addMemoriesLink').on('click', function () {
@@ -92,11 +91,11 @@
         map.on('taphold', function (event) {
             lastClickedCoords = event.latlng;
 
-            var popupContent = isMobile() ? addMemoriesLinkLarge : addMemoriesLink;
+            addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Add your memories here</p>';
 
             var popup = L.popup()
                 .setLatLng(event.latlng)
-                .setContent(popupContent)
+                .setContent(addMemoriesLink)
                 .openOn(map);
 
             $('#addMemoriesLink').on('click', function () {
