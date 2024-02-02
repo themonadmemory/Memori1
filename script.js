@@ -6,7 +6,7 @@ var souvenirs = [
 ];
 
 var manualMemories = [
-    { lat: -20.3975, lng: 56.4365, message: "Ahoï !!! MEMORIA is an innovative platform designed to facilitate the exploration and sharing of memories worldwide. This interactive map-based application allows users to pinpoint and relive significant moments by adding their own memories to specific locations. On a desktop, right-click on the map to add a memory. On mobile, (landcape mode), tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
+    { lat: -20.3975, lng: 56.4365, message: "Ahoï !!! MEMORIA is an innovative platform designed to facilitate the exploration and sharing of memories worldwide. This interactive map-based application allows users to pinpoint and relive significant moments by adding their own memories to specific locations. On a desktop, right-click on the map to add a memory. On mobile, (landscape mode), tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
     { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
     { lat: 36.157, lng: -82.728, message: "Shia Laboeuf VS Anons. Anons win with frog sound. Capture the flag. For the glorious favor of kek." },
     // Ajoutez d'autres souvenirs manuels au besoin
@@ -15,7 +15,7 @@ var manualMemories = [
 var lastClickedCoords;
 var map = L.map('interactive-map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-map.setZoom(10); // Définir le niveau de zoom initial
+map.setZoom(4); // Définir le niveau de zoom initial
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
@@ -24,7 +24,8 @@ souvenirs.forEach(function (souvenir) {
 
 // Ajoutez les souvenirs manuels
 manualMemories.forEach(function (memory, index) {
-    createMarker(memory, index === 0);
+    // Utiliser 'blue' pour que le marqueur soit en bleu
+    createMarker(memory, index === 0 ? false : true);
 });
 
 map.on('contextmenu', function (event) {
