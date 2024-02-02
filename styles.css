@@ -1,66 +1,164 @@
-/* styles.css */
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>MEMORIA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-search/dist/leaflet-control-search.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif; /* Ajout d'une police de caractères */
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #000; /* Ajout d'une couleur de fond noire à la page */
-}
+        #interactive-map {
+            height: 100vh;
+            width: 100%;
+            border: 2px solid #fff; /* Ajoute une bordure blanche à la carte */
+            border-radius: 10px; /* Ajoute des coins arrondis à la carte */
+            overflow: hidden; /* Assurez-vous que la carte ne dépasse pas les limites du conteneur */
+        }
 
-header {
-    display: none;
-}
+        .leaflet-control-attribution {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <section id="interactive-map"></section>
 
-#leader {
-    display: none;
-}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-search/dist/leaflet-control-search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" integrity="sha512-F5Zg5c4S94dgdF+QeWjRU5NL8b/UJlHtdEUpaMAeWvqCScC3DjLdmX1VDEsbi2CzPlJGoqas3ZI7PtW1N1azcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // script.js
 
-#button-container {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
+        var addMemoriesLink;
+        
+        var souvenirs = [
+            // Ajoutez d'autres souvenirs fictifs au besoin
+        ];
 
-.button {
-    display: inline-block;
-    padding: 10px;
-    margin-right: 10px;
-    background-color: #1b1b1b;
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-}
+        var manualMemories = [
+            { lat: -20.3975, lng: 56.4365, message: "Ahoï !!! MEMORIA is an innovative platform designed to facilitate the exploration and sharing of memories worldwide. This interactive map-based application allows users to pinpoint and relive significant moments by adding their own memories to specific locations. On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click to add your memories here. Refresh the page if you encounter any problems." },
+            { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
+            { lat: 36.157, lng: -82.728, message: "Shia Laboeuf VS Anons. Anons win with frog sound. Capture the flag. For the glorious favor of kek." },
+            // Ajoutez d'autres souvenirs manuels au besoin
+        ];
 
-#interactive-map {
-    height: 80vh; /* Ajustez la hauteur de la carte à 80% de la hauteur de la vue */
-    width: 100%;
-    border: 2px solid #fff; /* Ajout d'une bordure blanche à la carte */
-    border-radius: 10px; /* Ajout des coins arrondis à la carte */
-    overflow: hidden; /* Assurez-vous que la carte ne dépasse pas les limites du conteneur */
-}
+        var lastClickedCoords;
+        var map = L.map('interactive-map');
+        map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-.leaflet-popup-content {
-    max-width: 300px;
-    color: #000; /* Changement de la couleur du texte de la popup en noir */
-}
+        // Ajout de la barre de recherche
+        var searchControl = new L.Control.Search({
+            layer: L.geoJSON(souvenirs.concat(manualMemories)), // Ajoutez les souvenirs existants et manuels
+            propertyName: 'message',
+            marker: false,
+            moveToLocation: function(latlng, title, map) {
+                // Centrer la carte sur le résultat de la recherche
+                var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+                map.setView(latlng, zoom); 
+            }
+        });
+        map.addControl(searchControl);
 
-.leaflet-popup-content-wrapper {
-    background-color: #fff;
-    color: #333;
-    font-size: 14px;
-    padding: 10px;
-}
+        // Ajoutez les souvenirs existants
+        souvenirs.forEach(function (souvenir) {
+            createMarker(souvenir, 'blue');
+        });
 
-.leaflet-label {
-    font-size: 16px;
-    font-weight: bold;
-}
+        // Ajoutez les souvenirs manuels
+        manualMemories.forEach(function (memory, index) {
+            var markerColor = index === 0 ? 'black' : 'blue';
+            createMarker(memory, markerColor);
+        });
 
-@media only screen and (max-width: 767px) {
-    .leaflet-popup-content-wrapper {
-        font-size: 14px;
-    }
-}
+        map.on('contextmenu', function (event) {
+            lastClickedCoords = event.latlng;
+
+            addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Click to add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Click to add your memories here</p>';
+
+            var popup = L.popup()
+                .setLatLng(event.latlng)
+                .setContent(addMemoriesLink)
+                .openOn(map);
+
+            $('#addMemoriesLink').on('click', function () {
+                // Appeler une fonction pour pré-remplir le formulaire avec les coordonnées
+                fillFormWithCoordinates(lastClickedCoords.lat, lastClickedCoords.lng);
+
+                // Rediriger vers le formulaire
+                redirectToForm();
+
+                // Supprimer l'événement click pour éviter les appels multiples
+                $('#addMemoriesLink').off('click');
+            });
+        });
+
+        map.on('taphold', function (event) {
+            lastClickedCoords = event.latlng;
+
+            addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Add your memories here</p>';
+
+            var popup = L.popup()
+                .setLatLng(event.latlng)
+                .setContent(addMemoriesLink)
+                .openOn(map);
+
+            $('#addMemoriesLink').on('click', function () {
+                // Appeler une fonction pour pré-remplir le formulaire avec les coordonnées
+                fillFormWithCoordinates(lastClickedCoords.lat, lastClickedCoords.lng);
+
+                // Rediriger vers le formulaire
+                redirectToForm();
+
+                // Supprimer l'événement click pour éviter les appels multiples
+                $('#addMemoriesLink').off('click');
+            });
+        });
+
+        function createMarker(souvenir, color) {
+            var marker = L.marker([souvenir.lat, souvenir.lng], { icon: createCustomIcon(color) }).addTo(map);
+            marker.bindPopup(souvenir.message);
+            marker.on('click', function () {
+                // Afficher la bulle/fenêtre de lecture sans rediriger vers le formulaire
+                marker.openPopup();
+            });
+        }
+
+        function createCustomIcon(color) {
+            return new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-' + color + '.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+        }
+
+        function fillFormWithCoordinates(lat, lng) {
+            // Remplir le champ texte du formulaire avec les coordonnées
+            var memoryText = 'Coordinates: Lat=' + lat + ', Lng=' + lng + ' (' + lat + ', ' + lng + ')';
+            // Vous pouvez ajouter d'autres informations ou instructions ici si nécessaire
+            $('#memoryText').val(memoryText);
+        }
+
+        function redirectToForm() {
+            // Rediriger vers le formulaire seulement si la fenêtre "Add your memories here" est cliquée
+            window.location.href = 'submit_memory.html?lat=' + lastClickedCoords.lat + '&lng=' + lastClickedCoords.lng;
+        }
+
+        function isMobile() {
+            return window.innerWidth <= 767;
+        }
+    </script>
+</body>
+</html>
