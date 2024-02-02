@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <title>MEMORIA</title>
     <link rel="stylesheet" href="styles.css">
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            /* Ajout d'une police de caractères */
+            font-family: 'Arial', sans-serif; /* Ajout d'une police de caractères */
         }
 
         #interactive-map {
             height: 100vh;
             width: 100%;
-            border: 2px solid #fff;
-            /* Ajoute une bordure blanche à la carte */
-            border-radius: 10px;
-            /* Ajoute des coins arrondis à la carte */
-            overflow: hidden;
-            /* Assurez-vous que la carte ne dépasse pas les limites du conteneur */
+            border: 2px solid #fff; /* Ajoute une bordure blanche à la carte */
+            border-radius: 10px; /* Ajoute des coins arrondis à la carte */
+            overflow: hidden; /* Assurez-vous que la carte ne dépasse pas les limites du conteneur */
         }
 
         .leaflet-control-attribution {
@@ -32,19 +28,16 @@
         }
     </style>
 </head>
-
 <body>
     <section id="interactive-map"></section>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-control-search/dist/leaflet-control-search.js"></script>
-    <script src="path/to/local/fontawesome/js/all.min.js"></script> <!-- Update the path to the local Font Awesome JS file -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" integrity="sha512-F5Zg5c4S94dgdF+QeWjRU5NL8b/UJlHtdEUpaMAeWvqCScC3DjLdmX1VDEsbi2CzPlJGoqas3ZI7PtW1N1azcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         // script.js
 
         var addMemoriesLink;
-
+        
         var souvenirs = [
             // Ajoutez d'autres souvenirs fictifs au besoin
         ];
@@ -61,31 +54,18 @@
         map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-        // Ajout de la barre de recherche
-        var searchControl = new L.Control.Search({
-            layer: L.geoJSON(souvenirs.concat(manualMemories)), // Ajoutez les souvenirs existants et manuels
-            propertyName: 'message',
-            marker: false,
-            moveToLocation: function(latlng, title, map) {
-                // Centrer la carte sur le résultat de la recherche
-                var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-                map.setView(latlng, zoom);
-            }
-        });
-        map.addControl(searchControl);
-
         // Ajoutez les souvenirs existants
-        souvenirs.forEach(function(souvenir) {
+        souvenirs.forEach(function (souvenir) {
             createMarker(souvenir, 'blue');
         });
 
         // Ajoutez les souvenirs manuels
-        manualMemories.forEach(function(memory, index) {
+        manualMemories.forEach(function (memory, index) {
             var markerColor = index === 0 ? 'black' : 'blue';
             createMarker(memory, markerColor);
         });
 
-        map.on('contextmenu', function(event) {
+        map.on('contextmenu', function (event) {
             lastClickedCoords = event.latlng;
 
             addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Click to add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Click to add your memories here</p>';
@@ -95,7 +75,7 @@
                 .setContent(addMemoriesLink)
                 .openOn(map);
 
-            $('#addMemoriesLink').on('click', function() {
+            $('#addMemoriesLink').on('click', function () {
                 // Appeler une fonction pour pré-remplir le formulaire avec les coordonnées
                 fillFormWithCoordinates(lastClickedCoords.lat, lastClickedCoords.lng);
 
@@ -107,7 +87,7 @@
             });
         });
 
-        map.on('taphold', function(event) {
+        map.on('taphold', function (event) {
             lastClickedCoords = event.latlng;
 
             addMemoriesLink = isMobile() ? '<p id="addMemoriesLink" class="popup-link-large">Add your memories here</p>' : '<p id="addMemoriesLink" class="popup-link">Add your memories here</p>';
@@ -117,7 +97,7 @@
                 .setContent(addMemoriesLink)
                 .openOn(map);
 
-            $('#addMemoriesLink').on('click', function() {
+            $('#addMemoriesLink').on('click', function () {
                 // Appeler une fonction pour pré-remplir le formulaire avec les coordonnées
                 fillFormWithCoordinates(lastClickedCoords.lat, lastClickedCoords.lng);
 
@@ -132,7 +112,7 @@
         function createMarker(souvenir, color) {
             var marker = L.marker([souvenir.lat, souvenir.lng], { icon: createCustomIcon(color) }).addTo(map);
             marker.bindPopup(souvenir.message);
-            marker.on('click', function() {
+            marker.on('click', function () {
                 // Afficher la bulle/fenêtre de lecture sans rediriger vers le formulaire
                 marker.openPopup();
             });
@@ -166,5 +146,4 @@
         }
     </script>
 </body>
-
 </html>
