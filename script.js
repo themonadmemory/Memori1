@@ -15,7 +15,7 @@ var manualMemories = [
 var lastClickedCoords;
 var map = L.map('interactive-map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-map.setZoom(4); // Définir le niveau de zoom initial
+map.setZoom(10); // Définir le niveau de zoom initial
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
@@ -24,7 +24,7 @@ souvenirs.forEach(function (souvenir) {
 
 // Ajoutez les souvenirs manuels
 manualMemories.forEach(function (memory, index) {
-    // Utiliser 'blue' pour que le marqueur soit en bleu
+    // Utiliser 'blue' pour que le marqueur soit en bleu, sauf pour le premier
     createMarker(memory, index === 0 ? false : true);
 });
 
