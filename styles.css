@@ -35,7 +35,7 @@ header {
 }
 
 #interactive-map {
-    height: 100vh;
+    height: 80vh; /* Ajustez la hauteur de la carte à 80% de la hauteur de la vue */
     width: 100%;
     border: 2px solid #fff; /* Ajout d'une bordure blanche à la carte */
     border-radius: 10px; /* Ajout des coins arrondis à la carte */
