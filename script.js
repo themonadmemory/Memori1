@@ -15,7 +15,7 @@ var manualMemories = [
 var lastClickedCoords;
 var map = L.map('interactive-map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-map.setZoom(8); // Définir le niveau de zoom initial
+map.setZoom(10); // Définir le niveau de zoom initial
 
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
