@@ -10,7 +10,7 @@ var souvenirs = [
 var manualMemories = [
     { lat: -20.3975, lng: 56.4365, message: "Ahoï !!! MEMORIA is an innovative platform designed to facilitate the exploration and sharing of memories worldwide. This interactive map-based application allows users to pinpoint and relive significant moments by adding their own memories to specific locations. On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
     { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
-    
+    { lat: 36.1573, lng: -82.7285, message: "For the glorious favor of kek." },
     // Ajoutez d'autres souvenirs manuels au besoin
 ];
 
