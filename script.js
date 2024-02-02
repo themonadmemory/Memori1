@@ -28,6 +28,12 @@ manualMemories.forEach(function (memory, index) {
     createMarker(memory, index === 0 ? false : true);
 });
 
+// Ajouter une référence locale pour Font Awesome depuis le CDN jsDelivr
+var fontAwesomeLink = document.createElement('link');
+fontAwesomeLink.rel = 'stylesheet';
+fontAwesomeLink.href = 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css';
+document.head.appendChild(fontAwesomeLink);
+
 map.on('contextmenu', function (event) {
     lastClickedCoords = event.latlng;
 
