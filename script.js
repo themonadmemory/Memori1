@@ -17,6 +17,12 @@ var map = L.map('interactive-map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 map.setZoom(0.3); // Définir le niveau de zoom initial
 
+// Ajouter une référence locale pour Font Awesome depuis le CDN jsDelivr
+var fontAwesomeLink = document.createElement('link');
+fontAwesomeLink.rel = 'stylesheet';
+fontAwesomeLink.href = 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css';
+document.head.appendChild(fontAwesomeLink);
+
 // Ajoutez les souvenirs existants
 souvenirs.forEach(function (souvenir) {
     createMarker(souvenir, false);
@@ -27,12 +33,6 @@ manualMemories.forEach(function (memory, index) {
     // Utiliser 'blue' pour que le marqueur soit en bleu, sauf pour le premier
     createMarker(memory, index === 0 ? false : true);
 });
-
-// Ajouter une référence locale pour Font Awesome depuis le CDN jsDelivr
-var fontAwesomeLink = document.createElement('link');
-fontAwesomeLink.rel = 'stylesheet';
-fontAwesomeLink.href = 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css';
-document.head.appendChild(fontAwesomeLink);
 
 map.on('contextmenu', function (event) {
     lastClickedCoords = event.latlng;
