@@ -1,58 +1,134 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>MEMORIA</title>
     <link rel="stylesheet" href="styles.css">
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-search/dist/leaflet-control-search.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            font-family: 'Arial', sans-serif; /* Ajout d'une police de caractères */
+            font-family: 'Arial', sans-serif;
+            /* Ajout d'une police de caractères */
         }
 
         #interactive-map {
             height: 100vh;
             width: 100%;
-            border: 2px solid #fff; /* Ajoute une bordure blanche à la carte */
-            border-radius: 10px; /* Ajoute des coins arrondis à la carte */
-            overflow: hidden; /* Assurez-vous que la carte ne dépasse pas les limites du conteneur */
+            border: 2px solid #fff;
+            /* Ajoute une bordure blanche à la carte */
+            border-radius: 10px;
+            /* Ajoute des coins arrondis à la carte */
+            overflow: hidden;
+            /* Assurez-vous que la carte ne dépasse pas les limites du conteneur */
         }
 
         .leaflet-control-attribution {
             display: none;
         }
+
+        /* Ajout de styles pour la barre de recherche */
+        .leaflet-search-wrap {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        .leaflet-search-input {
+            width: 150px;
+            /* Ajustez la largeur selon vos besoins */
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .leaflet-search-cancel {
+            display: none;
+        }
+
+        .leaflet-search-button {
+            background-color: #0078d4;
+            /* Couleur du bouton de recherche */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .leaflet-search-button:hover {
+            background-color: #005a8e;
+            /* Couleur au survol du bouton de recherche */
+        }
     </style>
 </head>
+
 <body>
     <section id="interactive-map"></section>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" integrity="sha512-F5Zg5c4S94dgdF+QeWjRU5NL8b/UJlHtdEUpaMAeWvqCScC3DjLdmX1VDEsbi2CzPlJGoqas3ZI7PtW1N1azcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/leaflet-control-search/dist/leaflet-control-search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
+        integrity="sha512-F5Zg5c4S94dgdF+QeWjRU5NL8b/UJlHtdEUpaMAeWvqCScC3DjLdmX1VDEsbi2CzPlJGoqas3ZI7PtW1N1azcA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         // script.js
 
         var addMemoriesLink;
-        
+
         var souvenirs = [
             // Ajoutez d'autres souvenirs fictifs au besoin
         ];
 
         var manualMemories = [
-            { lat: -20.3975, lng: 56.4365, message: "Ahoï !!! MEMORIA is an innovative platform designed to facilitate the exploration and sharing of memories worldwide. This interactive map-based application allows users to pinpoint and relive significant moments by adding their own memories to specific locations. On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click to add your memories here. Refresh the page if you encounter any problems." },
-            { lat: 38.907, lng: -77.037, message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE." },
-            { lat: 36.157, lng: -82.728, message: "Shia Laboeuf VS Anons. Anons win with frog sound. Capture the flag. For the glorious favor of kek." },
+            {
+                lat: -20.3975,
+                lng: 56.4365,
+                message: "Ahoï !!! MEMORIA is an innovative platform designed to facilitate the exploration and sharing of memories worldwide. This interactive map-based application allows users to pinpoint and relive significant moments by adding their own memories to specific locations. On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click to add your memories here. Refresh the page if you encounter any problems."
+            },
+            {
+                lat: 38.907,
+                lng: -77.037,
+                message: "On a desktop, right-click on the map to add a memory. On mobile, tap and hold on the map to add a memory. A popup will appear, allowing users to click on ADD YOUR MEMORIES HERE."
+            },
+            {
+                lat: 36.157,
+                lng: -82.728,
+                message: "Shia Laboeuf VS Anons. Anons win with frog sound. Capture the flag. For the glorious favor of kek."
+            },
             // Ajoutez d'autres souvenirs manuels au besoin
         ];
 
         var lastClickedCoords;
         var map = L.map('interactive-map');
-        map.setView([manualMemories[0].lat, manualMemories[0].lng], 4); // Centrer sur le premier marqueur
+        map.setView([manualMemories[0].lat, manualMemories[0].lng], 4);
+        // Centrer sur le premier marqueur
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        // Ajout de la barre de recherche
+        var searchControl = new L.Control.Search({
+            layer: L.geoJSON(souvenirs.concat(manualMemories)), // Ajoutez les souvenirs existants et manuels
+            propertyName: 'message',
+            marker: false,
+            moveToLocation: function (latlng, title, map) {
+                // Centrer la carte sur le résultat de la recherche
+                var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+                map.setView(latlng, zoom);
+            }
+        });
+        map.addControl(searchControl);
 
         // Ajoutez les souvenirs existants
         souvenirs.forEach(function (souvenir) {
@@ -146,4 +222,5 @@
         }
     </script>
 </body>
+
 </html>
